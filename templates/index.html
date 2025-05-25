@@ -1,0 +1,36 @@
+<!doctype html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Prediksi Harga Emas</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}" />
+</head>
+<body>
+    <div class="container">
+        <h2>Input Data Harga Emas</h2>
+        <form method="POST" action="/predict" class="form-input">
+            <label for="open">Open:</label>
+            <input type="number" id="open" name="open" placeholder="Masukkan harga Open" required step="any"/>
+
+            <label for="high">High:</label>
+            <input type="number" id="high" name="high" placeholder="Masukkan harga High" required step="any"/>
+
+            <label for="low">Low:</label>
+            <input type="number" id="low" name="low" placeholder="Masukkan harga Low" required step="any"/>
+
+            <button type="submit">Prediksi</button>
+        </form>
+
+        {% if prediction %}
+            <div class="result">
+                <h3>{{ prediction }}</h3>
+            </div>
+        {% endif %}
+
+        <a href="/history" class="history-button">Lihat Riwayat</a>
+        <!-- <a href="/history" class="history-button">Lihat History</a> -->
+        <a href="/grafik" class="history-button">Lihat Grafik</a>
+    </div>
+</body>
+</html>

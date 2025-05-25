@@ -1,0 +1,43 @@
+<!doctype html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Grafik Prediksi Harga Emas</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+    <div class="container">
+        <h2>Grafik Riwayat Prediksi Harga Emas</h2>
+        <canvas id="priceChart" width="800" height="400"></canvas>
+
+        <a href="/" class="history-button">Kembali ke Form</a>
+    </div>
+
+    <script>
+        const ctx = document.getElementById('priceChart').getContext('2d');
+        const priceChart = new Chart(ctx, {
+            type: 'line',
+            data: {
+                labels: {{ timestamps|tojson }},
+                datasets: [{
+                    label: 'Harga Prediksi',
+                    data: {{ predictions|tojson }},
+                    backgroundColor: 'rgba(74, 144, 226, 0.2)',
+                    borderColor: '#4a90e2',
+                    borderWidth: 2,
+                    pointBackgroundColor: '#357ABD'
+                }]
+            },
+            options: {
+                responsive: true,
+                scales: {
+                    x: { title: { display: true, text: 'Waktu Prediksi' } },
+                    y: { title: { display: true, text: 'Harga ($)' } }
+                }
+            }
+        });
+    </script>
+</body>
+</html>
